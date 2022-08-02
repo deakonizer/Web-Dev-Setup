@@ -1,7 +1,7 @@
 # Web-Dev-Setup 
 This is my Web-Dev-Setup based on Gulp, to minify and clean my HTML, CSS and Javascript.
 
-#Install
+# Install
 Just download the Zip-File in your project folder, unzip it, and open the folder in your Code Editor.
 Open a terminal und type <br/>
 ```npm install```<br/>
