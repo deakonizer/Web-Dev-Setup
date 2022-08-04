@@ -18,6 +18,8 @@ const htmlmin = require('gulp-htmlmin');
 const terser = require('gulp-terser');
 const concat = require('gulp-concat');
 
+
+
 // Folder Variables
 const src = './src';
 const dest = './dest';
@@ -85,6 +87,9 @@ const jsscript = () => {
     .pipe(gulp.dest(`${dest}/js`));
 };
 
+// Optimize images
+
+
 // Watch changes and refresh page
 const watch = () => gulp.watch(
     [
@@ -113,7 +118,7 @@ const build = gulp.task('build',
     gulp.parallel(
         html,
         css,
-        // script
+        jsscript
     ));
 
 // Default function (used when type "gulp")
