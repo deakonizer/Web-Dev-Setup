@@ -5,7 +5,6 @@ const plumber = require('gulp-plumber');
 // SASS
 const sass = require('gulp-sass')(require('sass'));
 const postcss = require('gulp-postcss');
-const cssnano = require('cssnano');
 const browserSync = require('browser-sync').create();
 const autoprefixer = require("autoprefixer");
 const sourcemaps = require('gulp-sourcemaps'); 
@@ -17,6 +16,13 @@ const htmlmin = require('gulp-htmlmin');
 // JS
 const terser = require('gulp-terser');
 const concat = require('gulp-concat');
+
+
+// Images
+// import gulp from 'gulp';
+// const change = require('gulp-changed');
+const imagemin = require('gulp-imagemin');
+
 
 
 
@@ -90,16 +96,23 @@ const jsscript = () => {
 // Optimize images
 
 
+const images = () =>{
+    return gulp.src('src/images/**/*.{jpg,png}')
+    .pipe (imagemin(     
+    ))
+    .pipe(gulp.dest('dest/images'))
+};
+
 // Watch changes and refresh page
 const watch = () => gulp.watch(
     [
         `${src}/*.html`,
         `${src}/js/**/*.(js|ts)`,
         `${src}/scss/**/*.{sass,scss}`,
-        
+        `${src}/images/**/*.{png,jpg,gif}`
     ],
 
-    gulp.series(css, jsscript, html, reload)
+    gulp.series(css, jsscript, html, images, reload)
 );
 
 /* 
@@ -111,14 +124,15 @@ exports.dev = dev;
  */
 
 // Development tasks
-const dev = gulp.task('default', gulp.series(gulp.parallel(css, html, jsscript), serve, watch));
+const dev = gulp.task('default', gulp.series(gulp.parallel(css, html, jsscript, images), serve, watch));
 
 // Build tasks
 const build = gulp.task('build',
     gulp.parallel(
         html,
         css,
-        jsscript
+        jsscript,
+        images
     ));
 
 // Default function (used when type "gulp")
