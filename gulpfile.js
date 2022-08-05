@@ -98,8 +98,7 @@ const jsscript = () => {
 
 const images = () =>{
     return gulp.src('src/images/**/*.{jpg,png}')
-    .pipe (imagemin(     
-    ))
+    .pipe (imagemin())
     .pipe(gulp.dest('dest/images'))
 };
 
