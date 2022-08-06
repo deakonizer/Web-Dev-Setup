@@ -22,6 +22,7 @@ const concat = require('gulp-concat');
 // import gulp from 'gulp';
 // const change = require('gulp-changed');
 const imagemin = require('gulp-imagemin');
+const changed = require('gulp-changed');
 
 
 
@@ -98,8 +99,10 @@ const jsscript = () => {
 
 const images = () =>{
     return gulp.src('src/images/**/*.{jpg,png}')
+    .pipe(plumber())
+    .pipe(changed(`${dest}/images`))
     .pipe (imagemin())
-    .pipe(gulp.dest('dest/images'))
+    .pipe(gulp.dest('dest/images'));
 };
 
 // Watch changes and refresh page
